@@ -6,7 +6,7 @@ const User = require('../schema/schema');
 
 const conn = require('../db_con/mysql_db');
 
-router.get('/users', (req, res) => {
+router.get('/my_users', (req, res) => {
     conn.query('SELECT * FROM user', (err, results) => {
       if (err) throw err;
       res.json(results);
@@ -46,7 +46,7 @@ router.get('/emailcheck/:email', (req, res) => {
   
 
 
-router.post('/adduser', async (req, res) => {
+router.post('/my_user', async (req, res) => {
   try {
     const { email, username ,profilePicture} = req.body;
 
@@ -73,7 +73,7 @@ router.post('/adduser', async (req, res) => {
   }
 });
 
-router.delete('/users/:email', (req, res) => {
+router.delete('/my_user/:email', (req, res) => {
     conn.query('delete FROM user WHERE email = ?', [req.params.email], (err, result) => {
     
       if (err) throw err;
