@@ -32,12 +32,12 @@ router.get('/getuser/:username',async(req,res)=>{
 });
 
 router.post('/user/:username', async (req, res) => {
-    const { usernam } = req.params;
+    const { username } = req.params.username;
     const {username,email,profilePicture, bio, socialLinks, links } = req.body;
   
     try {
       // Find the user by username
-      const user = await User.findOne({ usernam });
+      const user = await User.findOne({ username });
   
       if (!user) {
         return res.status(404).json({ error: 'User not found.' });
