@@ -32,7 +32,7 @@ router.get('/getuser/:username',async(req,res)=>{
 });
 
 
-router.post('/user/:username', async (req, res) => {
+router.patch('/user/:username', async (req, res) => {
     const { username } = req.params;
     const { bio, socialLinks, links } = req.body;
   
