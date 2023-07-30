@@ -31,20 +31,22 @@ router.get('/getuser/:username',async(req,res)=>{
       }
 });
 
-
-router.patch('/user/:username', async (req, res) => {
-    const { username } = req.params;
-    const { bio, socialLinks, links } = req.body;
+router.post('/user/:username', async (req, res) => {
+    const { usernam } = req.params;
+    const {username,email,profilepicture, bio, socialLinks, links } = req.body;
   
     try {
       // Find the user by username
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ usernam });
   
       if (!user) {
         return res.status(404).json({ error: 'User not found.' });
       }
   
       // Update user information
+      user.username=username;
+      user.email=email;
+      user.profilePicture=profilepicture;
       user.bio = bio;
       user.socialLinks = socialLinks;
       user.links = links;
@@ -58,5 +60,4 @@ router.patch('/user/:username', async (req, res) => {
       res.status(500).json({ error: 'An internal server error occurred.' });
     }
   });
-
 module.exports=router;
