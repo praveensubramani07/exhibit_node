@@ -73,11 +73,21 @@ router.post('/adduser', async (req, res) => {
   }
 });
 
-router.delete('/users/:email', (req, res) => {
-    conn.query('delete FROM user WHERE email = ?', [req.params.email], (err, result) => {
-      if (err) throw err;
-      res.json(result);
+router.delete('/user/:email', (req, res) => {
+  conn.query('DELETE FROM user WHERE email = ?', [req.params.email], (err, mysqlResult) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to delete user from MySQL database.' });
+    }
+
+    // MongoDB Deletion
+    User.deleteOne({ email: req.params.email }, (mongoErr, mongoResult) => {
+      if (mongoErr) {
+        return res.status(500).json({ error: 'Failed to delete user from MongoDB database.' });
+      }
+
+      res.json({ mysqlResult, mongoResult });
     });
+  });
   }); 
 
 
