@@ -4,7 +4,7 @@ const router=express.Router();
 const mongoose = require('mongoose');
 const User = require('../schema/schema'); 
 
-router.get('/allusers',async(req,res)=>{
+router.get('/users',async(req,res)=>{
     try {
         const allUsers = await User.find({}); // Find all documents in the "users" collection
         return res.status(200).json(allUsers);
@@ -14,7 +14,7 @@ router.get('/allusers',async(req,res)=>{
       }
 });
 
-router.get('/getuser/:username',async(req,res)=>{
+router.get('/user/:username',async(req,res)=>{
     try {
         const username = req.params.username;
     
@@ -60,4 +60,23 @@ router.post('/user/:username', async (req, res) => {
       res.status(500).json({ error: 'An internal server error occurred.' });
     }
   });
+router.delete('/user/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    // Find the user by username
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Delete the user from the database
+    await user.remove();
+
+    res.json({ message: 'User deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete user' });
+  }
+});
 module.exports=router;
