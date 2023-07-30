@@ -33,7 +33,7 @@ router.get('/getuser/:username',async(req,res)=>{
 
 router.post('/user/:username', async (req, res) => {
     const { usernam } = req.params;
-    const {username,email,profilepicture, bio, socialLinks, links } = req.body;
+    const {username,email,profilepictur, bio, socialLinks, links } = req.body;
   
     try {
       // Find the user by username
@@ -46,7 +46,7 @@ router.post('/user/:username', async (req, res) => {
       // Update user information
       user.username=username;
       user.email=email;
-      user.profilePicture=profilepicture;
+      user.profilePicture=profilepictur;
       user.bio = bio;
       user.socialLinks = socialLinks;
       user.links = links;
