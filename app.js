@@ -11,14 +11,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //mongoDB conection and routes
+const mongoose=require('mongoose');
 const mongose=require('./db_con/mongo_db');
 const mongo=require('./routes/mongo');
-app.use('/',mongo);
+app.use('/api',mongo);
 
-//mysql connection and routes
-const conn=require('./db_con/mysql_db');
-const mysql=require('./routes/mysql');
-app.use('/',mysql);
+
 
 
 const port=3000;
