@@ -172,7 +172,7 @@ router.get('/user/dashboard/:email', async (req, res) => {
 // Route to update the username of a user
 router.patch('/user/update-username/', async (req, res) => {
   try {
-    const userId = req.body.userId;
+    const userId = req.body._id;
     const  newUsername  = req.body.username;
 
     // Find the user by user ID
