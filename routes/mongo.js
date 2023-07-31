@@ -170,10 +170,10 @@ router.get('/user/dashboard/:email', async (req, res) => {
 
 
 // Route to update the username of a user
-router.patch('/user/update-username/:userId', async (req, res) => {
+router.patch('/user/update-username/', async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const { newUsername } = req.body.username;
+    const userId = req.body.userId;
+    const  newUsername  = req.body.username;
 
     // Find the user by user ID
     const user = await User.findById(userId);
