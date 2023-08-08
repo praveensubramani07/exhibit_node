@@ -39,10 +39,10 @@ router.get('/user/check-username/:username', async (req, res) => {
 
     if (existingUser) {
       // Username is already taken
-      res.json({ available: false });
+      res.json({ available: false , exists:true});
     } else {
       // Username is available
-      res.json({ available: true });
+      res.json({ available: true ,exists:false});
     }
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
