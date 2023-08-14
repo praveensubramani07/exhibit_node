@@ -168,6 +168,19 @@ router.get('/user/dashboard/:email', async (req, res) => {
   }
 });
 
+router.post('/storeImageURL', async (req, res) => {
+  try {
+    const { userID, imageURL } = req.body;
+
+    // Update user profilePicture URL in MongoDB
+    await User.updateOne({ _id: userID }, { $set: { profilePicture: imageURL } });
+
+    res.status(200).send('Image URL updated in user profile');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating image URL in user profile');
+  }
+});
 
 // Route to update the username of a user
 router.patch('/user/update-username/', async (req, res) => {
