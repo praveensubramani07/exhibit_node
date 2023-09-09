@@ -37,16 +37,14 @@ router.get('/user/check-username/:username', async (req, res) => {
     // Check if the username already exists in the database
     const existingUser = await User.findOne({ username });
 
-    if (existingUser ) {
+    if (existingUser || username=="login" || username=="dashboard") {
       // Username is already taken
       res.json({ available: false , exists:true});
     } else {
       // Username is available
-      if(username=="login" && username=="dashboard"){
-        res.json({ available: false , exists:true});
-      }else{
+      
       res.json({ available: true ,exists:false});
-      }
+      
     }
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
